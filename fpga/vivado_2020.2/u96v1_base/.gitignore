@@ -1,0 +1,10 @@
+## u96v1_base project
+project_u96v1_base/
+## u96v1_base project
+
+#
+# git files that we don't want to ignore even it they are dot-files
+#
+!.gitignore
+!.mailmap
+
