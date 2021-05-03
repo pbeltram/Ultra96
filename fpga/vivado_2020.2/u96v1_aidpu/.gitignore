@@ -1,0 +1,10 @@
+## u96v1_aidpu project
+project_u96v1_aidpu/
+## u96v1_aidpu project
+
+#
+# git files that we don't want to ignore even it they are dot-files
+#
+!.gitignore
+!.mailmap
+
