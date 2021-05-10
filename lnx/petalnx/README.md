@@ -31,9 +31,7 @@ Copy binaries via scp to Ultra96:
 md5sum ./images/linux/BOOT.BIN
 md5sum ./images/linux/image.ub
 md5sum ./images/linux/boot.scr
-scp ./images/linux/BOOT.BIN root@ultra96:/media/sd-mmcblk0p1/
-scp ./images/linux/image.ub root@ultra96:/media/sd-mmcblk0p1/
-scp ./images/linux/boot.scr root@ultra96:/media/sd-mmcblk0p1/
+scp ./images/linux/BOOT.BIN ./images/linux/image.ub ./images/linux/boot.scr root@ultra96:/media/sd-mmcblk0p1/
 Check on Ultra96:
 md5sum /media/sd-mmcblk0p1/BOOT.BIN
 md5sum /media/sd-mmcblk0p1/image.ub
