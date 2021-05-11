@@ -56,6 +56,9 @@
 #set_property PACKAGE_PIN B5   [get_ports {BT_HCI_CTS              }];  # "B5.BT_HCI_CTS"
 #set_property PACKAGE_PIN B7   [get_ports {BT_HCI_RTS              }];  # "B7.BT_HCI_RTS"
 
+set_property PACKAGE_PIN B7 [get_ports BT_ctsn]; # BT_HCI_RTS on FPGA / emio_uart0_ctsn 
+set_property PACKAGE_PIN B5 [get_ports BT_rtsn]; # BT_HCI_CTS on FPGA / emio_uart0_rtsn
+
 # ----------------------------------------------------------------------------
 # High-speed expansion connector
 # ---------------------------------------------------------------------------- 
@@ -133,7 +136,7 @@
 # ---------------------------------------------------------------------------- 
 
 # Set the bank voltage for IO Bank 26 to 1.8V
-#set_property IOSTANDARD LVCMOS18 [get_ports -of_objects [get_iobanks 26]];
+set_property IOSTANDARD LVCMOS18 [get_ports -of_objects [get_iobanks 26]];
 
 # Set the bank voltage for IO Bank 65 to 1.2V
 #set_property IOSTANDARD LVCMOS12 [get_ports -of_objects [get_iobanks 65]];

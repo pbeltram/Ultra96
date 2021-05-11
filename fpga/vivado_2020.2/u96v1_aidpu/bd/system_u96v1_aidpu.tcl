@@ -633,6 +633,8 @@ proc create_root_design { parentCell } {
   # Create interface ports
 
   # Create ports
+  set BT_ctsn [ create_bd_port -dir I BT_ctsn ]
+  set BT_rtsn [ create_bd_port -dir O BT_rtsn ]
 
   # Create instance: dpu_concat_irq1, and set properties
   set dpu_concat_irq1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 dpu_concat_irq1 ]
@@ -890,7 +892,7 @@ proc create_root_design { parentCell } {
    CONFIG.PSU_MIO_75_DRIVE_STRENGTH {12} \
    CONFIG.PSU_MIO_75_POLARITY {Default} \
    CONFIG.PSU_MIO_75_SLEW {fast} \
-   CONFIG.PSU_MIO_76_DIRECTION {out} \
+   CONFIG.PSU_MIO_76_DIRECTION {inout} \
    CONFIG.PSU_MIO_76_INPUT_TYPE {cmos} \
    CONFIG.PSU_MIO_76_POLARITY {Default} \
    CONFIG.PSU_MIO_77_DIRECTION {inout} \
@@ -902,8 +904,8 @@ proc create_root_design { parentCell } {
    CONFIG.PSU_MIO_8_POLARITY {Default} \
    CONFIG.PSU_MIO_9_DIRECTION {inout} \
    CONFIG.PSU_MIO_9_POLARITY {Default} \
-   CONFIG.PSU_MIO_TREE_PERIPHERALS {UART 1#UART 1#UART 0#UART 0#I2C 1#I2C 1#SPI 1#GPIO0 MIO#GPIO0 MIO#SPI 1#SPI 1#SPI 1#GPIO0 MIO#SD 0#SD 0#SD 0#SD 0#GPIO0 MIO#GPIO0 MIO#GPIO0 MIO#GPIO0 MIO#SD 0#SD 0#GPIO0 MIO#SD 0#GPIO0 MIO#PMU GPI 0#DPAUX#DPAUX#DPAUX#DPAUX#GPIO1 MIO#PMU GPO 0#PMU GPO 1#PMU GPO 2#GPIO1 MIO#GPIO1 MIO#GPIO1 MIO#SPI 0#GPIO1 MIO#GPIO1 MIO#SPI 0#SPI 0#SPI 0#GPIO1 MIO#GPIO1 MIO#SD 1#SD 1#SD 1#SD 1#SD 1#SD 1#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 1#USB 1#USB 1#USB 1#USB 1#USB 1#USB 1#USB 1#USB 1#USB 1#USB 1#USB 1##} \
-   CONFIG.PSU_MIO_TREE_SIGNALS {txd#rxd#rxd#txd#scl_out#sda_out#sclk_out#gpio0[7]#gpio0[8]#n_ss_out[0]#miso#mosi#gpio0[12]#sdio0_data_out[0]#sdio0_data_out[1]#sdio0_data_out[2]#sdio0_data_out[3]#gpio0[17]#gpio0[18]#gpio0[19]#gpio0[20]#sdio0_cmd_out#sdio0_clk_out#gpio0[23]#sdio0_cd_n#gpio0[25]#gpi[0]#dp_aux_data_out#dp_hot_plug_detect#dp_aux_data_oe#dp_aux_data_in#gpio1[31]#gpo[0]#gpo[1]#gpo[2]#gpio1[35]#gpio1[36]#gpio1[37]#sclk_out#gpio1[39]#gpio1[40]#n_ss_out[0]#miso#mosi#gpio1[44]#gpio1[45]#sdio1_data_out[0]#sdio1_data_out[1]#sdio1_data_out[2]#sdio1_data_out[3]#sdio1_cmd_out#sdio1_clk_out#ulpi_clk_in#ulpi_dir#ulpi_tx_data[2]#ulpi_nxt#ulpi_tx_data[0]#ulpi_tx_data[1]#ulpi_stp#ulpi_tx_data[3]#ulpi_tx_data[4]#ulpi_tx_data[5]#ulpi_tx_data[6]#ulpi_tx_data[7]#ulpi_clk_in#ulpi_dir#ulpi_tx_data[2]#ulpi_nxt#ulpi_tx_data[0]#ulpi_tx_data[1]#ulpi_stp#ulpi_tx_data[3]#ulpi_tx_data[4]#ulpi_tx_data[5]#ulpi_tx_data[6]#ulpi_tx_data[7]##} \
+   CONFIG.PSU_MIO_TREE_PERIPHERALS {UART 1#UART 1#UART 0#UART 0#I2C 1#I2C 1#SPI 1#GPIO0 MIO#GPIO0 MIO#SPI 1#SPI 1#SPI 1#GPIO0 MIO#SD 0#SD 0#SD 0#SD 0#GPIO0 MIO#GPIO0 MIO#GPIO0 MIO#GPIO0 MIO#SD 0#SD 0#GPIO0 MIO#SD 0#GPIO0 MIO#PMU GPI 0#DPAUX#DPAUX#DPAUX#DPAUX#GPIO1 MIO#PMU GPO 0#PMU GPO 1#PMU GPO 2#GPIO1 MIO#GPIO1 MIO#GPIO1 MIO#SPI 0#GPIO1 MIO#GPIO1 MIO#SPI 0#SPI 0#SPI 0#GPIO1 MIO#GPIO1 MIO#SD 1#SD 1#SD 1#SD 1#SD 1#SD 1#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 1#USB 1#USB 1#USB 1#USB 1#USB 1#USB 1#USB 1#USB 1#USB 1#USB 1#USB 1#GPIO2 MIO#GPIO2 MIO} \
+   CONFIG.PSU_MIO_TREE_SIGNALS {txd#rxd#rxd#txd#scl_out#sda_out#sclk_out#gpio0[7]#gpio0[8]#n_ss_out[0]#miso#mosi#gpio0[12]#sdio0_data_out[0]#sdio0_data_out[1]#sdio0_data_out[2]#sdio0_data_out[3]#gpio0[17]#gpio0[18]#gpio0[19]#gpio0[20]#sdio0_cmd_out#sdio0_clk_out#gpio0[23]#sdio0_cd_n#gpio0[25]#gpi[0]#dp_aux_data_out#dp_hot_plug_detect#dp_aux_data_oe#dp_aux_data_in#gpio1[31]#gpo[0]#gpo[1]#gpo[2]#gpio1[35]#gpio1[36]#gpio1[37]#sclk_out#gpio1[39]#gpio1[40]#n_ss_out[0]#miso#mosi#gpio1[44]#gpio1[45]#sdio1_data_out[0]#sdio1_data_out[1]#sdio1_data_out[2]#sdio1_data_out[3]#sdio1_cmd_out#sdio1_clk_out#ulpi_clk_in#ulpi_dir#ulpi_tx_data[2]#ulpi_nxt#ulpi_tx_data[0]#ulpi_tx_data[1]#ulpi_stp#ulpi_tx_data[3]#ulpi_tx_data[4]#ulpi_tx_data[5]#ulpi_tx_data[6]#ulpi_tx_data[7]#ulpi_clk_in#ulpi_dir#ulpi_tx_data[2]#ulpi_nxt#ulpi_tx_data[0]#ulpi_tx_data[1]#ulpi_stp#ulpi_tx_data[3]#ulpi_tx_data[4]#ulpi_tx_data[5]#ulpi_tx_data[6]#ulpi_tx_data[7]#gpio2[76]#gpio2[77]} \
    CONFIG.PSU_SD0_INTERNAL_BUS_WIDTH {4} \
    CONFIG.PSU_SD1_INTERNAL_BUS_WIDTH {4} \
    CONFIG.PSU_USB3__DUAL_CLOCK_ENABLE {1} \
@@ -1235,6 +1237,8 @@ proc create_root_design { parentCell } {
    CONFIG.PSU__GPIO0_MIO__PERIPHERAL__ENABLE {1} \
    CONFIG.PSU__GPIO1_MIO__IO {MIO 26 .. 51} \
    CONFIG.PSU__GPIO1_MIO__PERIPHERAL__ENABLE {1} \
+   CONFIG.PSU__GPIO2_MIO__IO {MIO 52 .. 77} \
+   CONFIG.PSU__GPIO2_MIO__PERIPHERAL__ENABLE {1} \
    CONFIG.PSU__GPIO_EMIO_WIDTH {1} \
    CONFIG.PSU__GPIO_EMIO__WIDTH {[94:0]} \
    CONFIG.PSU__GT__LINK_SPEED {HBR} \
@@ -1469,11 +1473,13 @@ proc create_root_design { parentCell } {
 
   # Create port connections
   connect_bd_net -net dpu_concat_irq_dout [get_bd_pins dpu_concat_irq1/dout] [get_bd_pins zynq_ultra_ps_e/pl_ps_irq1]
+  connect_bd_net -net emio_uart0_ctsn_0_1 [get_bd_ports BT_ctsn] [get_bd_pins zynq_ultra_ps_e/emio_uart0_ctsn]
   connect_bd_net -net hier_dpu_GHP_CLK_O [get_bd_pins hier_dpu/GHP_CLK_O] [get_bd_pins zynq_ultra_ps_e/saxi_lpd_aclk] [get_bd_pins zynq_ultra_ps_e/saxihp0_fpd_aclk] [get_bd_pins zynq_ultra_ps_e/saxihp1_fpd_aclk] [get_bd_pins zynq_ultra_ps_e/saxihp2_fpd_aclk] [get_bd_pins zynq_ultra_ps_e/saxihp3_fpd_aclk] [get_bd_pins zynq_ultra_ps_e/saxihpc0_fpd_aclk]
   connect_bd_net -net hier_dpu_INTR [get_bd_pins dpu_concat_irq1/In0] [get_bd_pins hier_dpu/INTR]
   connect_bd_net -net ps_concat_irq0_dout [get_bd_pins ps_concat_irq0/dout] [get_bd_pins zynq_ultra_ps_e/pl_ps_irq0]
   connect_bd_net -net ps_irq0_const_dout [get_bd_pins ps_concat_irq0/In0] [get_bd_pins ps_irq0_const/dout]
   connect_bd_net -net rst_gen_reg_peripheral_aresetn [get_bd_pins hier_dpu/RSTn] [get_bd_pins hier_dpu/S_AXI_RSTn] [get_bd_pins rst_gen_reg/peripheral_aresetn]
+  connect_bd_net -net zynq_ultra_ps_e_emio_uart0_rtsn [get_bd_ports BT_rtsn] [get_bd_pins zynq_ultra_ps_e/emio_uart0_rtsn]
   connect_bd_net -net zynq_ultra_ps_e_pl_clk0 [get_bd_pins hier_dpu/CLK] [get_bd_pins hier_dpu/S_AXI_CLK] [get_bd_pins rst_gen_reg/slowest_sync_clk] [get_bd_pins zynq_ultra_ps_e/maxihpm0_lpd_aclk] [get_bd_pins zynq_ultra_ps_e/pl_clk0]
   connect_bd_net -net zynq_ultra_ps_e_pl_resetn0 [get_bd_pins rst_gen_reg/ext_reset_in] [get_bd_pins zynq_ultra_ps_e/pl_resetn0]
 
