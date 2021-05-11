@@ -8,7 +8,7 @@ INSTALL_DIR ?= .
 
 KIMAGE=$(XLINUX_DIR)/arch/arm64/boot/Image.gz
 #CONFIG=xilinx_zynqmp_defconfig
-CONFIG=xilinx_u96v1_defconfig
+CONFIG=ultra96v1_defconfig
 
 # Versioning system
 BUILD_NUMBER ?= 1
