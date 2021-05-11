@@ -2,7 +2,7 @@
 
 UBOOT_DIR := u-boot-rpt
 
-CONFIG=xilinx_zynqmp_virt_config
+CONFIG=ultra96v1_config
 
 UBOOT := $(UBOOT_DIR)/u-boot
 INSTALL_DIR ?= .
