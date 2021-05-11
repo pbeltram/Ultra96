@@ -7,6 +7,13 @@ Original git repo is forked from ```analogdevicesinc/linux``` git repo branch ``
 Changes are made and kept in ```pb_ultra96_2020.2_devel``` branch (default branch).  
 
 ---
+
+**Build**  
+
+```source ~/opt/Xilinx/Vitis/2020.2/settings64.sh```  
+```make clean```  
+```make```  
+
 **Create single patch file from tag to working version**  
 
 ```git diff master-xilinx-2020.2 > 0001-linux-rpt.patch```  
