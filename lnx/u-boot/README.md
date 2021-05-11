@@ -9,3 +9,11 @@ Changes are made and kept in ```pb_ultra96_2020.2_devel``` branch.
 
 ---
 
+**Build**  
+
+```source ~/opt/Xilinx/Vitis/2020.2/settings64.sh```  
+```make clean```  
+```make```  
+
+---
+
