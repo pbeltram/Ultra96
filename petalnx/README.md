@@ -1,4 +1,4 @@
-### Petalinux u961_base project build  
+### Petalinux project build  
 
 ---  
 
