@@ -21,7 +21,7 @@ set path_run ./project_${project_name}
 ################################################################################
 
 create_project $project_name -part $part -force $path_run
-set_property ip_repo_paths [concat [get_property ip_repo_paths [current_project]] {../../ip-repo}] [current_project]
+set_property ip_repo_paths [concat [get_property ip_repo_paths [current_project]] {../ip-repo}] [current_project]
 update_ip_catalog -rebuild
 
 ################################################################################
