@@ -15,8 +15,8 @@ Build u96v1_base:
 ```petalinux-config --get-hw-description=../u96v1_base_xsa```  
 ```petalinux-config -c rootfs```  
 ```petalinux-build -x mrproper```  
-```make -C ../../../u-boot/ clean```  
-```make -C ../../../linux/ clean```  
+```make -C ../../lnx/u-boot/ clean```  
+```make -C ../../lnx/linux/ clean```  
 ```petalinux-build```  
 ```petalinux-package --boot --fsbl ./images/linux/zynqmp_fsbl.elf --fpga ./images/linux/system.bit --pmufw ./images/linux/pmufw.elf --u-boot ./images/linux/u-boot.elf --atf ./images/linux/bl31.elf --force --output ./images/linux/BOOT.BIN```  
 
