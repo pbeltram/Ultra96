@@ -34,9 +34,9 @@ $(KIMAGE): | $(XLINUX_DIR)
 	echo $(shell echo $(BUILD_NUMBER) - 1 | bc ) > $(XLINUX_DIR)/.version
 	make -C $(XLINUX_DIR) ARCH=arm64 mrproper
 	make -C $(XLINUX_DIR) ARCH=arm64 $(CONFIG)
-	make -j $$(($(NUM_CPU)+1)) -C $(XLINUX_DIR) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu-
-	make -j $$(($(NUM_CPU)+1)) -C $(XLINUX_DIR) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- Image
-	make -j $$(($(NUM_CPU)+1)) -C $(XLINUX_DIR) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- modules
+	make -j $$(($(NUM_CPU)+1)) -C $(XLINUX_DIR) $(CONFIG) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- all
+	make -j $$(($(NUM_CPU)+1)) -C $(XLINUX_DIR) $(CONFIG) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- Image
+	make -j $$(($(NUM_CPU)+1)) -C $(XLINUX_DIR) $(CONFIG) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- modules
 
 clean:
 	-make -C $(XLINUX_DIR) ARCH=arm64 clean
