@@ -5,14 +5,14 @@
 Setup build environment:  
 ```. ~/opt/Xilinx/petalnx/2020.2/components/yocto/buildtools/environment-setup-x86_64-petalinux-linux```  
 ```source ~/opt/Xilinx/petalnx/2020.2/settings.sh```  
-```cd /mnt/src/gitrepos/myUltra96/lnx/petalnx/2020.2```  
+```cd /mnt/src/gitrepos/myUltra96/petalnx/```  
 
 ---  
 
 Build u96v1_base:  
 **NOTE:** Console terminal Width/Height for petalinux-config must be min 20 lines 80 columns!  
 ```cd ./u96v1_base```  
-```petalinux-config --get-hw-description=../../u96v1_base_xsa```  
+```petalinux-config --get-hw-description=../u96v1_base_xsa```  
 ```petalinux-config -c rootfs```  
 ```petalinux-build -x mrproper```  
 ```make -C ../../../u-boot/ clean```  
@@ -22,7 +22,7 @@ Build u96v1_base:
 
 Build and install developement SDK:  
 ```petalinux-build --sdk```  
-```petalinux-package --sysroot --sdk --dir ../../../../lnx/rootfs/```  
+```petalinux-package --sysroot --sdk --dir ../../rootfs/```  
 
 ---
 
