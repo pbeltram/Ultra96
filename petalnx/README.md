@@ -86,7 +86,7 @@ Min size: 512MByte.
 ```sudo mkfs.ext4 /dev/sdX2```  
 ```sudo e2label /dev/sdX2 rootfs```  
 ```udisksctl mount -b /dev/sdX2```  
-```sudo su -c 'tar xvf ./images/rootfs.tar.gz -C /media/$SUDO_USER/rootfs/'```  
+```sudo su -c 'tar xvf ./images/linux/rootfs.tar.gz -C /media/$SUDO_USER/rootfs/'```  
 ```sync```  
 
 ---
