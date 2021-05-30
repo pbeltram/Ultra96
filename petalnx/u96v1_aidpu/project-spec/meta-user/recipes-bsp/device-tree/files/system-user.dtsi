@@ -32,7 +32,7 @@
 		is-decoded-cs = <0>;
 		num-cs = <1>;
 		status = "okay";
-		spidev@0x00 {
+		spidev@0 {
 				compatible = "adi,swspi";
 				spi-max-frequency = <1000000>;
 				reg = <0>;
@@ -43,7 +43,7 @@
 		is-decoded-cs = <0>;
 		num-cs = <1>;
 		status = "okay";
-		spidev@0x00 {
+		spidev@0 {
 				compatible = "adi,swspi";
 				spi-max-frequency = <1000000>;
 				reg = <0>;
@@ -51,7 +51,8 @@
 };
 
 / {
-     dpu: dpu@8f000000 {
+amba_pl: amba_pl@0 {
+    hier_dpu_dpu: dpu_eu@8f000000 {
          compatible = "deephi,dpu";
          reg = <0x0 0x8f000000 0x0 0x700>;
          interrupts = <0x0 106 0x1 0x0 107 0x1>;
@@ -67,7 +68,8 @@
      };
      dpcma: dpcma {
          compatible = "deephi,cma";
-     };
+    };
+};
 
 };
 
