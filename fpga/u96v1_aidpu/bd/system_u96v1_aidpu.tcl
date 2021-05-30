@@ -123,8 +123,8 @@ set bCheckIPsPassed 1
 set bCheckIPs 1
 if { $bCheckIPs == 1 } {
    set list_check_ips "\ 
-xilinx.com:ip:xlconcat:2.1\
 xilinx.com:ip:xlconstant:1.1\
+xilinx.com:ip:xlconcat:2.1\
 xilinx.com:ip:proc_sys_reset:5.0\
 xilinx.com:ip:zynq_ultra_ps_e:3.3\
 xilinx.com:ip:dpu_eu:3.2\
@@ -541,10 +541,10 @@ proc create_hier_cell_hier_dpu { parentCell nameHier } {
    CONFIG.SUM_DSP_NUM {234} \
    CONFIG.S_AXI_CLK_INDEPENDENT {1} \
    CONFIG.TIMESTAMP_ENA {1} \
-   CONFIG.TIME_DAY {6} \
-   CONFIG.TIME_HOUR {9} \
+   CONFIG.TIME_DAY {15} \
+   CONFIG.TIME_HOUR {20} \
    CONFIG.TIME_MONTH {5} \
-   CONFIG.TIME_QUARTER {3} \
+   CONFIG.TIME_QUARTER {0} \
    CONFIG.TIME_YEAR {21} \
    CONFIG.URAM_N_USER {0} \
    CONFIG.VER_DPU_NUM {2} \
@@ -635,11 +635,19 @@ proc create_root_design { parentCell } {
   # Create ports
   set BT_ctsn [ create_bd_port -dir I BT_ctsn ]
   set BT_rtsn [ create_bd_port -dir O BT_rtsn ]
+  # Create instance: const_1b0, and set properties
+  set const_1b0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 const_1b0 ]
+  set_property -dict [ list \
+   CONFIG.CONST_VAL {0} \
+   CONFIG.CONST_WIDTH {1} \
+ ] $const_1b0
 
   # Create instance: dpu_concat_irq1, and set properties
   set dpu_concat_irq1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 dpu_concat_irq1 ]
   set_property -dict [ list \
-   CONFIG.NUM_PORTS {1} \
+   CONFIG.IN0_WIDTH {7} \
+   CONFIG.IN1_WIDTH {1} \
+   CONFIG.NUM_PORTS {2} \
  ] $dpu_concat_irq1
 
   # Create instance: hier_dpu
@@ -648,17 +656,17 @@ proc create_root_design { parentCell } {
   # Create instance: ps_concat_irq0, and set properties
   set ps_concat_irq0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 ps_concat_irq0 ]
   set_property -dict [ list \
-   CONFIG.IN0_WIDTH {8} \
+   CONFIG.IN0_WIDTH {1} \
    CONFIG.IN1_WIDTH {1} \
-   CONFIG.NUM_PORTS {1} \
+   CONFIG.IN2_WIDTH {1} \
+   CONFIG.IN3_WIDTH {1} \
+   CONFIG.IN4_WIDTH {1} \
+   CONFIG.IN5_WIDTH {1} \
+   CONFIG.IN6_WIDTH {1} \
+   CONFIG.IN7_WIDTH {1} \
+   CONFIG.NUM_PORTS {8} \
  ] $ps_concat_irq0
 
-  # Create instance: ps_irq0_const, and set properties
-  set ps_irq0_const [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 ps_irq0_const ]
-  set_property -dict [ list \
-   CONFIG.CONST_VAL {0} \
-   CONFIG.CONST_WIDTH {8} \
- ] $ps_irq0_const
 
   # Create instance: rst_gen_reg, and set properties
   set rst_gen_reg [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 rst_gen_reg ]
@@ -1472,12 +1480,12 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net zynq_ultra_ps_e_M_AXI_HPM0_LPD [get_bd_intf_pins hier_dpu/S_AXI] [get_bd_intf_pins zynq_ultra_ps_e/M_AXI_HPM0_LPD]
 
   # Create port connections
-  connect_bd_net -net dpu_concat_irq_dout [get_bd_pins dpu_concat_irq1/dout] [get_bd_pins zynq_ultra_ps_e/pl_ps_irq1]
+  connect_bd_net -net const_1b0_dout [get_bd_pins const_1b0/dout] [get_bd_pins dpu_concat_irq1/In1] [get_bd_pins ps_concat_irq0/In0] [get_bd_pins ps_concat_irq0/In1] [get_bd_pins ps_concat_irq0/In2] [get_bd_pins ps_concat_irq0/In3] [get_bd_pins ps_concat_irq0/In4] [get_bd_pins ps_concat_irq0/In5] [get_bd_pins ps_concat_irq0/In6] [get_bd_pins ps_concat_irq0/In7]
+  connect_bd_net -net dpu_concat_irq1_dout [get_bd_pins dpu_concat_irq1/dout] [get_bd_pins zynq_ultra_ps_e/pl_ps_irq1]
   connect_bd_net -net emio_uart0_ctsn_0_1 [get_bd_ports BT_ctsn] [get_bd_pins zynq_ultra_ps_e/emio_uart0_ctsn]
   connect_bd_net -net hier_dpu_GHP_CLK_O [get_bd_pins hier_dpu/GHP_CLK_O] [get_bd_pins zynq_ultra_ps_e/saxi_lpd_aclk] [get_bd_pins zynq_ultra_ps_e/saxihp0_fpd_aclk] [get_bd_pins zynq_ultra_ps_e/saxihp1_fpd_aclk] [get_bd_pins zynq_ultra_ps_e/saxihp2_fpd_aclk] [get_bd_pins zynq_ultra_ps_e/saxihp3_fpd_aclk] [get_bd_pins zynq_ultra_ps_e/saxihpc0_fpd_aclk]
   connect_bd_net -net hier_dpu_INTR [get_bd_pins dpu_concat_irq1/In0] [get_bd_pins hier_dpu/INTR]
   connect_bd_net -net ps_concat_irq0_dout [get_bd_pins ps_concat_irq0/dout] [get_bd_pins zynq_ultra_ps_e/pl_ps_irq0]
-  connect_bd_net -net ps_irq0_const_dout [get_bd_pins ps_concat_irq0/In0] [get_bd_pins ps_irq0_const/dout]
   connect_bd_net -net rst_gen_reg_peripheral_aresetn [get_bd_pins hier_dpu/RSTn] [get_bd_pins hier_dpu/S_AXI_RSTn] [get_bd_pins rst_gen_reg/peripheral_aresetn]
   connect_bd_net -net zynq_ultra_ps_e_emio_uart0_rtsn [get_bd_ports BT_rtsn] [get_bd_pins zynq_ultra_ps_e/emio_uart0_rtsn]
   connect_bd_net -net zynq_ultra_ps_e_pl_clk0 [get_bd_pins hier_dpu/CLK] [get_bd_pins hier_dpu/S_AXI_CLK] [get_bd_pins rst_gen_reg/slowest_sync_clk] [get_bd_pins zynq_ultra_ps_e/maxihpm0_lpd_aclk] [get_bd_pins zynq_ultra_ps_e/pl_clk0]
